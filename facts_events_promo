@@ -1,0 +1,13 @@
+--creating facts table with new promo price after applying the promotions -- 
+select * into fact_events_promo from
+(
+select *,
+case 
+	when promo_type like '25% OFF' then (base_price - 0.25 * base_price)
+	when promo_type like '33% OFF' then  (base_price - 0.33 * base_price)
+	when promo_type like '50% OFF' then  (base_price - 0.50 * base_price)
+	when promo_type like 'BOGOF' then  (base_price / 2)
+	when promo_type like '500 Cashback' then  (base_price - 500)
+	end as promo_price
+from [dbo].[fact_events]
+)tbl
