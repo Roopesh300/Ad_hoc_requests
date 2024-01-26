@@ -6,7 +6,7 @@ with cte as (
 	p.category,
 	sum([quantity_sold(before_promo)]) as qty_sold_bp,
 	sum([quantity_sold(after_promo)]) as qty_sold_ap,
-	cast(100 * (sum([quantity_sold(after_promo)]) - sum([quantity_sold(before_promo)])) / (sum([quantity_sold(before_promo)])) as decimal(10,2)) as isu
+	cast(100.00 * (sum([quantity_sold(after_promo)]) - sum([quantity_sold(before_promo)])) / (sum([quantity_sold(before_promo)])) as decimal(10,2)) as isu
 	from fact_events_promo f
 	left join [dbo].[dim_products] p on f.product_code = p.product_code
 	where f.campaign_id like 'CAMP_DIW_01'
